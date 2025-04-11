@@ -1,0 +1,26 @@
+# hash map. numbers in array, how many times it appears. 
+# if value is greater than 1, break and output false. otherwise, true.
+
+# create a class called solution. this will act as a "container for the code"
+class Solution:
+# define the function inside the class called hasDuplicate. 
+# define variables:
+# self: references class
+# nums: List[int]: input array[nums] will be integers
+# -> bool: output will be a boolean expression of true or false
+    def hasDuplicate(self, nums: List[int]) -> bool:
+# initialize an empty set called seen.
+        seen = set()
+# create a loop to run through each number in array[nums]
+        for num in nums:
+# checks to see if the number has been seen. 
+# if it has, we can end the loop and return true.
+# if it hasn't we can continue the loop by adding the number to the hash
+            if num in seen:
+                return True
+            seen.add(num)
+# once completing the loop, if every number is unique then return false.
+        return False
+
+# space complexity: O(n)
+# time complexity: O(n)
