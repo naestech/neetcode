@@ -1,0 +1,42 @@
+# hash map. count each letter in both strings.
+# if all letters cancel out (result in 0), it's an anagram. otherwise, false.
+
+# create a class called Solution. this will act as a "container for the code"
+class Solution:
+# define the function inside the class called isAnagram.
+# s and t: input strings (assumed lowercase a-z)
+# -> bool: output will be a boolean expression of true or false
+    def isAnagram(self, s: str, t: str) -> bool:
+    
+# first check: if lengths are different, they can't be anagrams.
+        if len(s) != len(t):
+            return False
+
+# create an array of 26 zeroes to represent counts for each letter in the alphabet
+# index 0 = 'a', 1 = 'b', ..., 25 = 'z'
+        count = [0] * 26
+
+# loop through each character in both strings at the same time
+        for i in range(len(s)):
+        
+# increment the count for the character in s
+            count[ord(s[i]) - ord('a')] += 1
+# decrement the count for the character in t
+            count[ord(t[i]) - ord('a')] -= 1
+
+# after the loop, if all counts are zero, the strings are anagrams
+# loop through each value in the count array
+        for val in count:
+        
+# if any value isn't zero, something didn't cancel out → not an anagram
+            if val != 0:
+                return False
+
+# if we made it through all that, it's a valid anagram
+        return True
+
+# space complexity: O(n + m)
+# where n is equal to string 1, m is equal to string 2.
+
+# time complexity: O(1)
+# because there are constantly 26 letters in the english alphabet.
