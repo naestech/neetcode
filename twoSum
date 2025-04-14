@@ -1,0 +1,30 @@
+# hash map: find two indices whose numbers add up to the target. if they exist, return them. otherwise, no result.
+
+# create a class called solution which will act as a container for the method.
+# define the function twoSum inside the class.
+# nums: a list of integers, target: the integer sum we're trying to find, -> List[int]: returns a list of two indices whose values add up to target.
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+
+    # create an empty hash map to store each number and its index
+    # key = number from the list, value = its index in the list
+        indices = {}  # val -> index
+
+    # first loop: go through the nums list and store each number with its index
+        for i, n in enumerate(nums):
+
+        # update the dictionary with the current number and its index
+            indices[n] = i
+
+    # second loop: go through the nums list again
+        for i, n in enumerate(nums):
+
+        # calculate what number would need to be added to n to reach the target
+            diff = target - n
+
+        # check if that "diff" value exists in our hash map
+        # also make sure we're not using the same index twice
+            if diff in indices and indices[diff] != i:
+
+            # if conditions are met, return the current index and the index of the "diff" value
+                return [i, indices[diff]]
