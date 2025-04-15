@@ -1,0 +1,36 @@
+# create a class called solution which will act as a container for the method.
+# define the function topKFrequent inside the class.
+# nums: a list of integers, k: an integer specifying how many frequent elements we need to return, -> List[int]: returns a list of the k most frequent elements in nums.
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    
+    # create an empty dictionary to store the frequency of each number in nums
+    # key = number from the list, value = how many times it appears in the list
+        count = {}  
+
+    # create a list of empty lists to store numbers by their frequency count
+    # freq[i] will store all numbers that appear i times in nums
+        freq = [[] for i in range(len(nums) + 1)]  
+
+    # first loop: go through the nums list to count the frequency of each number
+        for num in nums:
+            # update the dictionary by increasing the count for each number
+            count[num] = 1 + count.get(num, 0)  
+
+    # second loop: go through each key-value pair in the count dictionary
+        for num, cnt in count.items():
+            # add the number to the appropriate index in the freq list based on its frequency
+            freq[cnt].append(num)  
+
+    # create an empty list to store the result (the top k frequent elements)
+        res = []  
+
+    # third loop: go through the freq list in reverse order (starting from the highest frequency)
+        for i in range(len(freq) - 1, 0, -1):
+            # iterate over the numbers that appear 'i' times
+            for num in freq[i]:
+                # append the number to the result list
+                res.append(num)  
+                # if we've added k numbers to the result, return it
+                if len(res) == k:  
+                    return res
