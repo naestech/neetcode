@@ -1,0 +1,28 @@
+# the function productExceptSelf returns a list of products where each element is the product of all numbers in the input list except the one at that index.
+
+# create a class called solution which will act as a container for the method.
+# define the function productExceptSelf inside the class.
+# nums: a list of integers, -> List[int]: returns a list of products where each element is the product of all elements in nums except the one at that index.
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # initialize the result list with 1's, the same length as nums
+        res = [1] * (len(nums))
+
+        # initialize a variable to keep track of the prefix product (product of all numbers before the current index)
+        prefix = 1
+        # first loop: compute the prefix product for each index and store it in res
+        for i in range(len(nums)):
+            res[i] = prefix
+            # update prefix to include the current number in nums
+            prefix *= nums[i]
+
+        # initialize a variable to keep track of the postfix product (product of all numbers after the current index)
+        postfix = 1
+        # second loop: compute the postfix product for each index and multiply it with the corresponding prefix product in res
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            # update postfix to include the current number in nums
+            postfix *= nums[i]
+
+        # return the final result list
+        return res
