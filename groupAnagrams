@@ -1,0 +1,30 @@
+# solution class which acts as a container for the method.
+class Solution:
+    
+    # define the function groupAnagrams inside the class.
+    # strs: a list of strings (words).
+    # -> List[List[str]]: returns a list of lists, where each list contains words that are anagrams of each other.
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+        # create a hash map (defaultdict of lists) to store groups of anagrams
+        res = defaultdict(list)
+
+        # loop through each string in the input list
+        for s in strs:
+        
+            # create a list of 26 zeroes to count the frequency of each letter in the string
+            # index 0 = 'a', 1 = 'b', ..., 25 = 'z'
+            count = [0] * 26
+
+            # loop through each character in the string
+            for c in s:
+
+                # increment the count for the current character
+                count[ord(c) - ord('a')] += 1
+
+            # convert the count list to a tuple (hashable type) and use it as the key in the hash map
+            # append the string to the list associated with this letter frequency pattern
+            res[tuple(count)].append(s)
+
+        # return the grouped anagrams as a list of lists (the values from the hash map)
+        return list(res.values())
