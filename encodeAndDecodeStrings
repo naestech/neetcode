@@ -1,0 +1,45 @@
+# create a class called solution which will act as a container for the methods.
+# define the function encode and decode inside the class.
+# strs: a list of strings to be encoded, -> str: returns a single string that represents all the strings encoded.
+# s: an encoded string, -> List[str]: returns a list of decoded strings.
+
+class Solution:
+    
+    # encode function: takes a list of strings and converts it to a single encoded string.
+    def encode(self, strs: List[str]) -> str:
+        # initialize an empty result string
+        res = ""
+        
+        # loop through each string in strs
+        for s in strs:
+            # for each string, append its length and a delimiter '#' followed by the string itself to the result
+            res += str(len(s)) + "#" + s
+        
+        # return the encoded string
+        return res
+
+    # decode function: takes an encoded string and decodes it back into a list of strings.
+    def decode(self, s: str) -> List[str]:
+        # initialize an empty list to store the decoded strings
+        res = []
+        # start from the beginning of the encoded string
+        i = 0
+        
+        # loop through the encoded string until we have processed the entire string
+        while i < len(s):
+            # find the position of the delimiter '#'
+            j = i
+            while s[j] != '#':
+                j += 1
+            # extract the length of the next string (the part before the '#')
+            length = int(s[i:j])
+            # update i to point to the character right after the '#'
+            i = j + 1
+            # extract the string of the specified length from the encoded string
+            j = i + length
+            res.append(s[i:j])
+            # update i to point to the next string to decode
+            i = j
+            
+        # return the list of decoded strings
+        return res
