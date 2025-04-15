@@ -1,0 +1,27 @@
+# the function longestConsecutive returns the length of the longest consecutive sequence in an unsorted array of integers.
+
+# create a class called solution which will act as a container for the method.
+# define the function longestConsecutive inside the class.
+# nums: a list of integers, -> int: returns the length of the longest consecutive sequence in nums.
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        # create a dictionary to store the length of the longest sequence for each number
+        mp = defaultdict(int)
+        # initialize the result variable to track the maximum length of consecutive sequence
+        res = 0
+
+        # iterate through each number in the list
+        for num in nums:
+            # if the number hasn't been processed yet (not part of any sequence)
+            if not mp[num]:
+                # calculate the length of the sequence by considering both sides (num-1 and num+1)
+                mp[num] = mp[num - 1] + mp[num + 1] + 1
+                # extend the sequence to the left by updating the start of the sequence
+                mp[num - mp[num - 1]] = mp[num]
+                # extend the sequence to the right by updating the end of the sequence
+                mp[num + mp[num + 1]] = mp[num]
+                # update the result with the maximum length found so far
+                res = max(res, mp[num])
+
+        # return the length of the longest consecutive sequence
+        return res
